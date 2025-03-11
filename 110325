@@ -46,3 +46,51 @@ void loop() {}
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+void setup() {
+  Serial.begin(9600);
+  pinMode(10, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char x = Serial.read();
+    
+    if (x == 'F') {
+      digitalWrite(7, HIGH);
+      digitalWrite(9, HIGH);
+      delay(3000);
+    } if (x == 'T') {
+      digitalWrite(8, HIGH);
+      digitalWrite(10, HIGH);
+      delay(3000);
+    } else {
+      digitalWrite(8, LOW);
+      digitalWrite(9, LOW);
+      digitalWrite(10, LOW);
+      digitalWrite(7, LOW);
+    }
+  }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+#define BOTAO 4
+#define LED 3
+
+void setup() {
+  pinMode(BOTAO, INPUT);
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (digitalRead (BOTAO) == HIGH) {
+    digitalWrite(LED,HIGH);
+    Serial.println ("Botao Pressionado!");
+  } else {
+    digitalWrite(LED,LOW);
+  }
+}
