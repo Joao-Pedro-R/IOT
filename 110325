@@ -61,10 +61,14 @@ void loop() {
     if (x == 'F') {
       digitalWrite(7, HIGH);
       digitalWrite(9, HIGH);
+      digitalWrite(8, LOW);
+      digitalWrite(10, LOW);
       delay(3000);
     } if (x == 'T') {
       digitalWrite(8, HIGH);
       digitalWrite(10, HIGH);
+      digitalWrite(9, LOW);
+      digitalWrite(7, LOW);
       delay(3000);
     } else {
       digitalWrite(8, LOW);
