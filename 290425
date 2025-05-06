@@ -22,8 +22,8 @@
 #include <PubSubClient.h>
 #include <Ultrasonic.h>
 
-#define TRIGGER_PIN  12
-#define ECHO_PIN     13
+#define TRIGGER_PIN  26
+#define ECHO_PIN     27
 
 Ultrasonic ultrasonic(TRIGGER_PIN, ECHO_PIN);
 // Update these with values suitable for your network.
@@ -94,9 +94,9 @@ void reconnect() {
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish("IOTFIAP/topicoToFora", "kd meus fiapers");
+      client.publish("1GORILAX100CARAS/IN", "kd meus fiapers");
       // ... and resubscribe
-      client.subscribe("IOTFIAP/ToDentro");
+      client.subscribe("1GORILAX100CARAS/OUT");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -130,9 +130,12 @@ cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
   if (now - lastMsg > 2000) {
     lastMsg = now;
     ++value;
-    snprintf (msg, MSG_BUFFER_SIZE, "hello world #%ld", value);
+    snprintf(msg, MSG_BUFFER_SIZE, "hello world #%ld", value);
     Serial.print("Publish message: ");
     Serial.println(msg);
-    client.publish("IOTFIAP/topicoToFora", cmMsec);
+    
+    char distanceStr[10];
+    dtostrf(cmMsec, 4, 2, distanceStr);
+    client.publish("1GORILAX100CARAS/IN", distanceStr);
   }
 }
